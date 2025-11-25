@@ -6,8 +6,11 @@
 ![Version](https://img.shields.io/badge/Release-v1.0.0-orange.svg)
 
 A robust **Weekly Smart Timer** built on **ESP32 WROOM + DS3231 RTC**, supporting **8 programmable daily intervals**, with **NTP fallback**, persistent configuration via **LittleFS**, and a clean mobile-friendly **Web UI** for management.
+---
+## Expected Audience
 
-This project is designed for industrial and home automation tasks requiring accurate repeatable scheduling, even without internet.
+This project is designed for home automation tasks requiring accurate (as much permitted by internal or external RTC) and repeatable scheduling, even without internet connectivity.  
+It was developed and tested in Pakistan (UTC+5). Instructions for customizing the timezone are provided in the header section of the main `.ino` file.
 
 ---
 
@@ -29,13 +32,19 @@ This project is designed for industrial and home automation tasks requiring accu
 - **Fail-safe time handling** (RTC watchdog → NTP sync)
 - **Relay control with selectable active-low logic**
 
----
 
-## 📱 Web Dashboard Screenshot
-*(More screenshots can be added later)*
 
-### Main Dashboard
-![Dashboard](docs/Dashboard.jpg)
+
+## 📸 Web UI Screenshots
+
+<table>
+  <tr>
+    <td align="center"><img src="images/Dashboard.jpg" width="200px"><br><sub>Dashboard</sub></td>
+    <td align="center"><img src="images/Schedule.jpg" width="200px"><br><sub>Schedule Editor</sub></td>
+    <td align="center"><img src="images/Override.jpg" width="200px"><br><sub>Override Setup</sub></td>
+    <td align="center"><img src="images/WiFiSetup.jpg" width="200px"><br><sub>WiFi Setup</sub></td>
+  </tr>
+</table>
 
 ---
 
@@ -53,23 +62,10 @@ This project is designed for industrial and home automation tasks requiring accu
 ## 🔌 Wiring Diagram
 Full schematic (SVG):
 
-![Schematic](docs/Esp32Project.SVG)
+![Schematic](images/Esp32Project.SVG)
 
 ---
 
-## 📂 Folder Structure
-
-weekly-smart-timer/
-├── src/
-│   └── WeeklySmartTimer.ino
-├── README.md
-└── docs/
-    ├── Dashboard.jpg
-	├── Schedule.jpg
-	├── Overrride.jpg
-    └── Esp32Project.SVG
-
----
 
 ## 🔧 Installation
 
@@ -97,7 +93,7 @@ Install via Arduino Library Manager:
 
 ### **3. Upload Firmware**
 1. Board: **ESP32 Dev Module**  
-2. Partition Scheme: **Default 4MB with LittleFS**  
+2. Partition Scheme: **Default 4MB with spiffs (1.2MB APP/1.5MB SPIFFS)**  
 3. Upload `.ino` file  
 4. (Optional) Upload LittleFS data using the plugin
 
@@ -108,8 +104,8 @@ Install via Arduino Library Manager:
 ### Modes
 - **STA Mode** (WiFi configured)
 - **AP Mode** (fallback)  
-  - SSID: `Smart_Timer`  
-  - Password: `timer1234`  
+  - SSID: `your_AP_SSID`  
+  - Password: `your_AP_PASS`  
   - IP: `192.168.4.1`
 
 ### UI Sections
@@ -143,5 +139,53 @@ This ensures accurate operation even after:
 - ESP32 WROOM Dev Module  
 - DS3231 RTC with CR2032  
 - LittleFS filesystem  
-- Firmware size ~466 KB  
-- Works fully offline  
+- Works fully offline
+
+## ⚠️ Disclaimer
+
+This project is provided **for educational, experimental, and hobby use only**.  
+By using this software, wiring diagram, or any related material, **you agree that you are solely responsible for your own build, safety, wiring, and results**.
+
+The author provides **no guarantees** regarding:
+
+- Proper operation or accuracy  
+- Fitness for any particular purpose  
+- Electrical safety  
+- Reliability of timing, relay switching, or RTC accuracy  
+- Freedom from defects, bugs, or unexpected behavior  
+- Suitability for commercial or industrial applications  
+
+Using this project with **relays, mains voltage, heaters, motors, pumps, or any externally connected equipment** is entirely **at your own risk**.
+
+The author is **not responsible** for:
+
+- Damage to property  
+- Loss of equipment  
+- Fire, electrical failure, or hazards  
+- Financial loss or business interruption  
+- Data loss or corruption  
+- Missing, delayed, or incorrect timer actions  
+- Any emotional or psychological distress  
+- Any result of modifying, adapting, or reusing this code  
+
+---
+
+## 🛡️ Legal Notice (MIT License)
+
+This project is distributed under the **MIT License**.
+
+Under the MIT License:
+
+> **“THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND…  
+> IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY…”**
+
+This means:
+
+- You **cannot hold the author liable** for anything that happens due to use or misuse  
+- You **cannot claim damages** of any kind  
+- All responsibility remains with **you, the user**  
+- Using or modifying this project indicates **full acceptance of the MIT License terms**  
+
+For full details, please refer to the LICENSE file included in this repository.
+
+
